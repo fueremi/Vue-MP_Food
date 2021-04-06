@@ -1,6 +1,9 @@
 <template>
-  <div class="row mt-5">
-    <div class="col">
+  <b-row>
+    <b-col md="6" class="mt-3">
+      <img src="../assets/images/hero.png" alt="" width="100%" />
+    </b-col>
+    <b-col md="6" class="mt-3">
       <div class="d-flex h-100">
         <div class="justify-content-center align-self-center">
           <h2>
@@ -13,11 +16,8 @@
           </b-button>
         </div>
       </div>
-    </div>
-    <div class="col">
-      <img src="../assets/images/hero.png" alt="" width="100%" />
-    </div>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>

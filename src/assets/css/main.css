@@ -1,11 +1,21 @@
 #app {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .router-link-active {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-.btn-success, .badge-success {
-    background-color: #4EB883 !important;
+.btn-success,
+.badge-success {
+  background-color: #4eb883 !important;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+.card-text {
+  font-size: 12px;
 }

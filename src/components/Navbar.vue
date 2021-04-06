@@ -2,7 +2,7 @@
   <div>
     <b-navbar toggleable="lg" type="light" variant="white">
       <b-container>
-        <b-navbar-brand href="#">MP Food</b-navbar-brand>
+        <b-navbar-brand href="#"><strong>MP Food</strong></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
