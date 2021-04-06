@@ -15,7 +15,7 @@
       </b-row>
 
       <b-row class="mb-3">
-        <b-col md="4" class="mt-4" v-for="product in products" :key="product.id">
+        <b-col md="4" class="mt-4" v-for="product in bestProducts" :key="product.id">
           <CardProduct :product="product"/>
         </b-col>
       </b-row>
@@ -29,7 +29,7 @@ import Navbar from "@/components/Navbar.vue";
 import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
 
-import axios from "axios";
+import {mapGetters} from "vuex"
 
 export default {
   name: "Home",
@@ -38,23 +38,15 @@ export default {
     Hero,
     CardProduct
   },
-  data(){
-    return {
-      products: [],
-    }
+  computed: {
+    ...mapGetters({
+      bestProducts: 'getData'
+    })
   },
-  methods: {
-    setProducts(data){
-      this.products = data
-    }
-  },
-  async mounted() {
-    try {
-      const response = await axios.get("http://localhost:3000/best-products")
-      this.setProducts(response.data)
-    } catch (err) {
-      console.error(err);
-    }
+  created(){
+    this.$store.dispatch('fetchData', {
+      endpoints: 'best-products'
+    })
   }
 };
 </script>
