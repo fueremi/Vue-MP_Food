@@ -12,7 +12,7 @@
       Price: <strong>{{ product.harga }}</strong>
     </b-card-text>
 
-    <b-button to="/" variant="success" block>
+    <b-button :to="'/foods/'+product.id" variant="success" block>
       <b-icon-cart></b-icon-cart> Order
     </b-button>
   </b-card>

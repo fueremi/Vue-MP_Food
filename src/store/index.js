@@ -29,7 +29,11 @@ export default new Vuex.Store({
     },
     mutations: {
         SET_DATA: (state, payload) => {
-            state.datas = payload
+            if(payload.length){
+                state.datas = payload
+            } else{
+                state.datas = [payload]
+            }
         }
     },
     getters: {
