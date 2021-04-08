@@ -2,7 +2,19 @@
   <div>
     <Navbar />
     <b-container>
-      <h2>List of <strong>Food</strong></h2>
+      <h2 class="mt-5">List of <strong>Food</strong></h2>
+
+      <b-row class="mt-3">
+        <b-col>
+          <b-input-group class="mt-3">
+            <b-form-input v-model="search" @keyup="getSearchData"></b-form-input>
+            <b-input-group-append>
+              <b-button variant="outline-success"><b-icon-search></b-icon-search></b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-col>
+      </b-row>
+
       <b-row class="mt-3">
         <b-col
           md="4"
@@ -29,10 +41,23 @@ export default {
     Navbar,
     CardProduct,
   },
+  data(){
+    return {
+      search: "",
+    }
+  },
   computed: {
     ...mapGetters({
       bestProducts: "getData",
     }),
+  },
+  methods: {
+    getSearchData(){
+      this.$store.dispatch("fetchSearchData", {
+        endpoints: "products",
+        search: this.search
+      })
+    }
   },
   created() {
     this.$store.dispatch("fetchData", {

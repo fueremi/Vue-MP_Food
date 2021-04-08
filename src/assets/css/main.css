@@ -7,7 +7,8 @@
 }
 
 .btn-success,
-.badge-success {
+.badge-success,
+.outline-success {
   background-color: #4eb883 !important;
 }
 

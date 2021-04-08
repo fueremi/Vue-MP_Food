@@ -17,6 +17,14 @@ export default new Vuex.Store({
             } catch (err) {
                 console.error(err);
             }
+        },
+        fetchSearchData: async ( {commit}, payload ) => {
+            try {
+                const res = await axios.get(`http://localhost:3000/${payload.endpoints}?q=${payload.search}`)
+                commit('SET_DATA', res.data)
+            } catch (err) {
+                console.error(err);
+            }
         }
     },
     mutations: {
