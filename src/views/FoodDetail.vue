@@ -8,10 +8,10 @@
         </b-col>
       </b-row>
 
-      <b-row v-for="product in productsDetail" :key="product.id" class="mt-3">
+      <b-row class="mt-3">
         <b-col md="6">
           <b-img
-            :src="require(`../assets/images/${product.gambar}`)"
+            :src="`../assets/images/${dataFoodDetail.gambar}`"
             fluid
             class="shadow"
           ></b-img>
@@ -19,22 +19,22 @@
 
         <b-col md="6">
           <h2 class="text-left">
-            <strong> {{ product.nama }} </strong>
+            <strong> {{ dataFoodDetail.nama }} </strong>
           </h2>
           <hr />
           <h4 class="text-left">
-            Harga: <strong> {{ product.harga }} </strong>
+            Harga: <strong> {{ dataFoodDetail.harga }} </strong>
           </h4>
 
           <b-form class="mt-4" @submit.prevent="">
             <b-form-group
               id="input-group-1"
               label="Quantity:"
-              label-for="input-quantity_order"
+              label-for="input-quantity"
             >
               <b-form-input
-                id="input-quantity_order"
-                v-model="order.quantity_order"
+                id="input-quantity"
+                v-model="order.quantity"
                 type="number"
               ></b-form-input>
             </b-form-group>
@@ -53,7 +53,7 @@
               ></b-form-textarea>
             </b-form-group>
 
-            <b-button type="submit" variant="success" @click="ordering" :disabled="!order.quantity_order || !order.notes"
+            <b-button type="submit" variant="success" @click="ordering" :disabled="!order.quantity || !order.notes"
               ><b-icon-cart></b-icon-cart> Order</b-button
             >
           </b-form>
@@ -94,11 +94,11 @@ export default {
   },
   methods: {
     ordering() {
-      this.order.product = this.productsDetail[0];
-      this.$store.dispatch("postOrder", this.order);
+      this.order.product = this.dataFoodDetail;
+      this.$store.dispatch("postDataCarts", this.order);
       this.$router.push("/cart");
       this.$root.$bvToast.toast(
-        `${this.order.quantity_order} pcs ${this.order.product.nama} succesfully added to cart`,
+        `${this.order.quantity} pcs ${this.order.product.nama} succesfully added to cart`,
         {
           title: "MP Food Notification",
           toaster: "b-toaster-top-center",
@@ -110,13 +110,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      productsDetail: "getData",
+      dataFoodDetail: "getDataFoods",
     }),
   },
   mounted() {
-    this.$store.dispatch("fetchData", {
-      endpoints: `products/${this.$route.params.id}`,
-    });
+    this.$store.dispatch("fetchDetailFood", {
+      id_food: this.$route.params.id
+    })
   },
 };
 </script>

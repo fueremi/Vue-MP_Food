@@ -1,5 +1,5 @@
 {
-  "best-products": [
+  "best-sellers": [
     {
       "id": 1,
       "code": "K-01",
@@ -33,7 +33,7 @@
       "gambar": "mie-ayam-bakso.jpg"
     }
   ],
-  "products": [
+  "foods": [
     {
       "id": 1,
       "code": "K-01",
@@ -107,6 +107,33 @@
       "gambar": "lontong-opor-ayam.jpg"
     }
   ],
-  "cart": [],
+  "carts": [
+    {
+      "quantity": "1",
+      "notes": "Spicy",
+      "product": {
+        "id": 1,
+        "code": "K-01",
+        "nama": "Sate Ayam",
+        "harga": 16000,
+        "is_ready": true,
+        "gambar": "sate-ayam.jpg"
+      },
+      "id": 1
+    },
+    {
+      "quantity": "1",
+      "notes": "Add urat",
+      "product": {
+        "id": 6,
+        "code": "K-06",
+        "nama": "Bakso",
+        "harga": 10000,
+        "is_ready": true,
+        "gambar": "bakso.jpg"
+      },
+      "id": 2
+    }
+  ],
   "orders": []
 }

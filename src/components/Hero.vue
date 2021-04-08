@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col md="6" class="mt-3">
-      <img src="../assets/images/hero.png" alt="" width="100%" />
+      <img src="assets/images/hero.png" alt="" width="100%" />
     </b-col>
     <b-col md="6" class="mt-3">
       <div class="d-flex h-100">

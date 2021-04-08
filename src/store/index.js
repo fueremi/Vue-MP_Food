@@ -1,94 +1,147 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 import axios from 'axios'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        datas: [],
-        carts: [],
+        bestSellers: [], // Data of Best Seller Foods and Drinks
+        foods: [], // Data of Foods
+        drinks: [], // Data of Drinks
+        carts: [] // Data of Carts
     },
     actions: {
-        fetchData: async ({ commit }, payload) => {
+        // Actions Best Sellers Foods and Drinks 
+        fetchDataBestSellers: async ({ commit }) => {
+            console.log('Actions: Fetch Data Best Sellers is working ...');
             try {
-                const res = await axios.get(`http://localhost:3000/${payload.endpoints}`)
-                commit('SET_DATA', res.data)
+                const response = await axios.get(`http://localhost:3000/best-sellers`)
+                commit('SET_BEST_SELLERS', response.data)
             } catch (err) {
                 console.error(err);
             }
-        },
-        fetchDataOrder: async ({ commit }, payload) => {
-            try {
-                const res = await axios.get(`http://localhost:3000/${payload.endpoints}`)
-                commit('SET_ORDER', res.data)
-            } catch (err) {
-                console.error(err);
-            }
-        },
-        fetchSearchData: async ({ commit }, payload) => {
-            try {
-                const res = await axios.get(`http://localhost:3000/${payload.endpoints}?q=${payload.search}`)
-                commit('SET_DATA', res.data)
-            } catch (err) {
-                console.error(err);
-            }
+            console.log('Actions: Fetch Data Best Sellers is Done!');
         },
 
-        postOrder: async ({ commit }, payload) => {
+        // Action Data of Foods
+        fetchDataFoods: async ({ commit }) => {
+            console.log('Actions Fetch Data Foods is Working ...')
             try {
-                const res = await axios.post(`http://localhost:3000/cart`, payload)
-                commit('ADD_DATA', res.data)
+                const response = await axios.get('http://localhost:3000/foods')
+                commit('SET_FOODS', response.data)
             } catch (err) {
                 console.error(err);
             }
+            console.log('Actions Fetch Data Foods is Done!')
         },
-        removeOrder: async( {commit}, payload ) => {
+        fetchSearchFoods: async ({ commit }, payload) => {
+            console.log('Actions Fetch Search Foods is Working ...')
             try {
-                await axios.delete(`http://localhost:3000/cart/${payload.id}`)
-                commit('DEL_ORDER', payload)
+                const response = await axios.get(`http://localhost:3000/foods?q=${payload.search}`)
+                commit('SET_FOODS', response.data)
             } catch (err) {
                 console.error(err);
             }
+            console.log('Actions Fetch Search Foods is Done!')
+        },
+        fetchDetailFood: async ({ commit }, payload) => {
+            console.log('Actions Fetch Detail Food is Working ...')
+            try {
+                const response = await axios.get(`http://localhost:3000/foods/${payload.id_food}`)
+                commit('SET_FOODS', response.data)
+            } catch (err) {
+                console.error(err);
+            }
+            console.log('Actions Fetch Detail Food is Done!')
+        },
+
+        // Action Data of Carts
+        fetchDataCarts: async ({ commit }) => {
+            console.log('Actions Fetch Data Carts is Working ...')
+            try {
+                const response = await axios.get('http://localhost:3000/carts')
+                commit('SET_CARTS', response.data)
+            } catch (err) {
+                console.error(err);
+            }
+            console.log('Actions Fetch Data Carts is Done!')
+        },
+        postDataCarts: async ({ commit }, payload) => {
+            console.log('Actions Post Data Carts is Working ...')
+            try {
+                const response = await axios.post('http://localhost:3000/carts', payload)
+                commit('ADD_CARTS', response.data)
+            } catch (err) {
+                console.error(err);
+            }
+            console.log('Actions Post Data Carts is Done!')
+        },
+        deleteDataCart: async ({ commit }, payload) => {
+            console.log('Actions Delete Data Cart is Working ...')
+            try {
+                await axios.delete(`http://localhost:3000/carts/${payload.cart_id}`)
+                commit('DELETE_CARTS', payload)
+            } catch (err) {
+                console.error(err);
+            }
+            console.log('Actions Delete Data Cart is Done!')
         }
-
     },
     mutations: {
-        SET_DATA: (state, payload) => {
-            if (payload.length) {
-                state.datas = payload
-            } else {
-                state.datas = [payload]
-            }
+        // Mutations Best Seller Foods and Drinks 
+        SET_BEST_SELLERS: (state, payload) => {
+            
+            console.log('Mutations SET_BEST_SELLERS is working ...');
+            state.bestSellers = payload
+            console.log('Mutations SET_BEST_SELLERS is Done!');
         },
-        SET_ORDER: (state, payload) => {
-            state.carts = payload
-        },
-        ADD_DATA: (state, payload) => {
-            state.carts.push(payload)
-        },
-        DEL_ORDER: (state, payload) => {
-            state.carts.splice((payload.id -1), 1)
-        }
 
+        // Mutations Data of Foods
+        SET_FOODS: (state, payload) => {
+            console.log('Mutations SET_FOODS is Working ...')
+            state.foods = payload
+            console.log('Mutations SET_FOODS is Done!')
+        },
+
+        // Mutations Data of Carts
+        SET_CARTS: (state, payload) => {
+            console.log('Mutations SET_CARTS is Working ...')
+            state.carts = payload
+            console.log('Mutations SET_CARTS is Done!')
+        },
+        ADD_CARTS: (state, payload) => {
+            console.log('Mutations ADD_CARTS is Working ...')
+            state.carts.push(payload)
+            console.log('Mutations ADD_CARTS is Done!')
+        },
+        DELETE_CARTS: (state, payload) => {
+            console.log('Mutations DELETE_CARTS is Working ...')
+            state.carts.splice((payload.id -1), 1)
+            console.log('Mutations DELETE_CARTS is Done!')
+        }
     },
     getters: {
-        getData: state => {
-            return state.datas.filter(data => data.harga = Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "IDR",
-
-                // These options are needed to round to whole numbers if that's what you want.
-                //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-                maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-            }).format(data.harga))
+        // Getters Best Seller Foods and Drinks
+        getDataBestSellers: state => {
+            console.log('Getters Get Data Best Sellers is working ...');
+            return state.bestSellers;
         },
-        getOrderLength: state => {
+
+        // Getters Data of Foods
+        getDataFoods: state => {
+            console.log('Getters Get Data Foods is working ...')
+            return state.foods;
+        },
+
+        // Getters Data of Carts
+        getDataCartsLength: state => {
+            console.log('Getters Get Data Carts Length is working ...')
             return state.carts.length
         },
-        getOrder: state => {
+        getDataCarts: state => {
+            console.log('Getters Get Data Carts is working ...')
             return state.carts
         }
-    },
+    }
 })

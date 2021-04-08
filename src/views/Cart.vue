@@ -17,20 +17,30 @@
       <b-row class="mt-3">
         <b-col>
           <div>
-            <b-table fluid striped hover :fields="fields" :items="dataOrder">
+            <b-table fluid striped hover :fields="fields" :items="dataCarts">
               <template #cell(index)="data">
                 {{ data.index + 1 }}
               </template>
 
               <template #cell(product)="data">
                 <img
-                  :src="require('../assets/images/' + data.item.product.gambar)"
+                  :src="`../assets/images/${data.item.product.gambar}`"
                   height="100"
                 />
               </template>
 
-              <template #cell(quantity_order)="data">
-                {{ data.item.quantity_order }} pcs
+              <template #cell(price)="data">
+                {{
+                  Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "IDR",
+                    maximumFractionDigits: 0,
+                  }).format(data.item.product.harga)
+                }}
+              </template>
+
+              <template #cell(quantity)="data">
+                {{ data.item.quantity }} pcs
               </template>
 
               <template #cell(total)="data">
@@ -39,15 +49,12 @@
                     style: "currency",
                     currency: "IDR",
                     maximumFractionDigits: 0,
-                  }).format(
-                    +data.item.product.harga.replace(/,|IDR/g, "") *
-                      data.item.quantity_order
-                  )
+                  }).format(data.item.product.harga * data.item.quantity)
                 }}
               </template>
 
-              <template #cell(delete)="data" :style="style">
-                <b-button @click="removeOrder(data.item.id)"
+              <template #cell(delete)="data">
+                <b-button @click="deleteDataCart(data.item)" variant="transparent" class="text-danger"
                   ><b-icon-trash></b-icon-trash
                 ></b-button>
               </template>
@@ -55,14 +62,19 @@
               <template #custom-foot>
                 <b-tr>
                   <b-th colspan="5"></b-th>
-                  <b-th variant="secondary">Total Price: </b-th>
-                  <b-th variant="success" colspan="2"> {{ Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "IDR",
-                    maximumFractionDigits: 0,
-                  }).format(dataOrder.reduce( (item, data) => {
-                      return item+(+data.product.harga.replace(/,|IDR/g, "") * data.quantity_order)
-                    }, 0)) }}
+                  <b-th >Total Price: </b-th>
+                  <b-th variant="success" colspan="2">
+                    {{
+                      Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "IDR",
+                        maximumFractionDigits: 0,
+                      }).format(
+                        dataCarts.reduce((item, data) => {
+                          return item + data.product.harga * data.quantity;
+                        }, 0)
+                      )
+                    }}
                   </b-th>
                 </b-tr>
               </template>
@@ -104,8 +116,8 @@ export default {
         "index",
         { key: "product", label: "Image" },
         { key: "product.nama", label: "Food" },
-        { key: "product.harga", label: "Price" },
-        "quantity_order",
+        "price",
+        "quantity",
         "notes",
         "total",
         "delete",
@@ -116,22 +128,28 @@ export default {
     };
   },
   methods: {
-    removeOrder(id) {
-      this.$store.dispatch("removeOrder", {
-        endpoints: "cart",
-        id: id,
+    deleteDataCart(item) {
+      this.$store.dispatch("deleteDataCart", {
+        cart_id: item.id,
       });
+      this.$root.$bvToast.toast(
+        `${item.product.nama} succesfully deleted from cart!`,
+        {
+          title: "MP Food Notification",
+          toaster: "b-toaster-top-center",
+          variant: "danger",
+          autoHideDelay: 5000,
+        }
+      );
     },
   },
   computed: {
     ...mapGetters({
-      dataOrder: "getOrder",
+      dataCarts: "getDataCarts",
     }),
   },
   mounted() {
-    this.$store.dispatch("fetchDataOrder", {
-      endpoints: "cart",
-    });
+    this.$store.dispatch("fetchDataCarts");
   },
 };
 </script>

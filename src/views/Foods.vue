@@ -19,10 +19,10 @@
         <b-col
           md="4"
           class="mb-3"
-          v-for="product in bestProducts"
-          :key="product.id"
+          v-for="food in dataFoods"
+          :key="food.id"
         >
-          <CardProduct :product="product" />
+          <CardProduct :product="food" />
         </b-col>
       </b-row>
     </b-container>
@@ -48,21 +48,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      bestProducts: "getData",
+      dataFoods: "getDataFoods",
     }),
   },
   methods: {
     getSearchData(){
-      this.$store.dispatch("fetchSearchData", {
-        endpoints: "products",
+      this.$store.dispatch("fetchSearchFoods", {
         search: this.search
       })
     }
   },
   created() {
-    this.$store.dispatch("fetchData", {
-      endpoints: "products",
-    });
+    this.$store.dispatch("fetchDataFoods")
   },
 };
 </script>

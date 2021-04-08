@@ -15,8 +15,13 @@
       </b-row>
 
       <b-row class="mb-3">
-        <b-col md="4" class="mt-4" v-for="product in bestProducts" :key="product.id">
-          <CardProduct :product="product"/>
+        <b-col
+          md="4"
+          class="mt-4"
+          v-for="bestSeller in dataBestSellers"
+          :key="bestSeller.id"
+        >
+          <CardProduct :product="bestSeller"/>
         </b-col>
       </b-row>
     </b-container>
@@ -29,24 +34,22 @@ import Navbar from "@/components/Navbar.vue";
 import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
 
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
   components: {
     Navbar,
     Hero,
-    CardProduct
+    CardProduct,
   },
   computed: {
     ...mapGetters({
-      bestProducts: 'getData'
-    })
+      dataBestSellers: "getDataBestSellers",
+    }),
   },
-  created(){
-    this.$store.dispatch('fetchData', {
-      endpoints: 'best-products'
-    })
-  }
+  created() {
+    this.$store.dispatch("fetchDataBestSellers");
+  },
 };
 </script>

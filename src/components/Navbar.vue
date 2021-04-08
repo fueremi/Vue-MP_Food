@@ -17,7 +17,7 @@
             <b-nav-item to="/cart">
               Keranjang
               <b-icon-bag />
-              <b-badge variant="success" class="ml-2"> {{lengthOrder}}</b-badge>
+              <b-badge variant="success" class="ml-2"> {{lengthOrder}} </b-badge>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
@@ -33,13 +33,11 @@ export default {
   name: "Navbar",
   computed: {
     ...mapGetters({
-      lengthOrder: "getOrderLength",
+      lengthOrder: "getDataCartsLength",
     }),
   },
   mounted(){
-    this.$store.dispatch('fetchDataOrder', {
-      endpoints: 'cart'
-    })
+    this.$store.dispatch('fetchDataCarts')
   }
 };
 </script>
