@@ -33,3 +33,11 @@
 .breadcrumb-item.active {
   font-weight: bold;
 }
+
+th {
+  text-align: center;
+}
+
+td[aria-colindex="8"], td[aria-colindex="5"] {
+  text-align: center;
+}

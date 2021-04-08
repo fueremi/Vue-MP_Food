@@ -107,30 +107,6 @@
       "gambar": "lontong-opor-ayam.jpg"
     }
   ],
-  "cart": [
-    {
-      "quantity_order": "1",
-      "product": {
-        "id": 1,
-        "code": "K-01",
-        "nama": "Sate Ayam",
-        "harga": "IDR 16,000",
-        "is_ready": true,
-        "gambar": "sate-ayam.jpg"
-      },
-      "id": 1
-    },
-    {
-      "product": {
-        "id": 1,
-        "code": "K-01",
-        "nama": "Sate Ayam",
-        "harga": "IDR 16,000",
-        "is_ready": true,
-        "gambar": "sate-ayam.jpg"
-      },
-      "id": 2
-    }
-  ],
+  "cart": [],
   "orders": []
 }

@@ -96,7 +96,7 @@ export default {
     ordering() {
       this.order.product = this.productsDetail[0];
       this.$store.dispatch("postOrder", this.order);
-      this.$router.push("/foods");
+      this.$router.push("/cart");
       this.$root.$bvToast.toast(
         `${this.order.quantity_order} pcs ${this.order.product.nama} succesfully added to cart`,
         {

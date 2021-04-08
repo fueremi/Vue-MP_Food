@@ -14,7 +14,7 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item to="/">
+            <b-nav-item to="/cart">
               Keranjang
               <b-icon-bag />
               <b-badge variant="success" class="ml-2"> {{lengthOrder}}</b-badge>

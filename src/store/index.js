@@ -43,6 +43,14 @@ export default new Vuex.Store({
             } catch (err) {
                 console.error(err);
             }
+        },
+        removeOrder: async( {commit}, payload ) => {
+            try {
+                await axios.delete(`http://localhost:3000/cart/${payload.id}`)
+                commit('DEL_ORDER', payload)
+            } catch (err) {
+                console.error(err);
+            }
         }
 
     },
@@ -59,7 +67,11 @@ export default new Vuex.Store({
         },
         ADD_DATA: (state, payload) => {
             state.carts.push(payload)
+        },
+        DEL_ORDER: (state, payload) => {
+            state.carts.splice((payload.id -1), 1)
         }
+
     },
     getters: {
         getData: state => {
@@ -74,6 +86,9 @@ export default new Vuex.Store({
         },
         getOrderLength: state => {
             return state.carts.length
+        },
+        getOrder: state => {
+            return state.carts
         }
     },
 })
