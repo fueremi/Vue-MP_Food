@@ -26,7 +26,7 @@
             Harga: <strong> {{ product.harga }} </strong>
           </h4>
 
-          <b-form class="mt-4">
+          <b-form class="mt-4" @submit.prevent="">
             <b-form-group
               id="input-group-1"
               label="Quantity:"
@@ -34,8 +34,8 @@
             >
               <b-form-input
                 id="input-quantity_order"
+                v-model="order.quantity_order"
                 type="number"
-                required
               ></b-form-input>
             </b-form-group>
 
@@ -46,13 +46,16 @@
             >
               <b-form-textarea
                 id="input-notes"
+                v-model="order.notes"
                 placeholder="eg: Spicy, Half rice ..."
                 rows="3"
                 max-rows="6"
               ></b-form-textarea>
             </b-form-group>
 
-              <b-button type="submit" variant="success"><b-icon-cart></b-icon-cart> Order</b-button>
+            <b-button type="submit" variant="success" @click="ordering" :disabled="!order.quantity_order || !order.notes"
+              ><b-icon-cart></b-icon-cart> Order</b-button
+            >
           </b-form>
         </b-col>
       </b-row>
@@ -85,7 +88,25 @@ export default {
           active: true,
         },
       ],
+      order: {},
+      status: true
     };
+  },
+  methods: {
+    ordering() {
+      this.order.product = this.productsDetail[0];
+      this.$store.dispatch("postOrder", this.order);
+      this.$router.push("/foods");
+      this.$root.$bvToast.toast(
+        `${this.order.quantity_order} pcs ${this.order.product.nama} succesfully added to cart`,
+        {
+          title: "MP Food Notification",
+          toaster: "b-toaster-top-center",
+          variant: "success",
+          autoHideDelay: 5000,
+        }
+      );
+    },
   },
   computed: {
     ...mapGetters({
