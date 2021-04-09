@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
+// Import modules store
 import foods from './modules/foods';
 import carts from './modules/carts';
 import bestSellers from './modules/bestSellers';

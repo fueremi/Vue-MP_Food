@@ -107,20 +107,6 @@
       "gambar": "lontong-opor-ayam.jpg"
     }
   ],
-  "carts": [
-    {
-      "quantity": "1",
-      "notes": "Spicy level: 3",
-      "product": {
-        "id": 2,
-        "code": "K-02",
-        "nama": "Nasi Goreng Telur",
-        "harga": 14000,
-        "is_ready": true,
-        "gambar": "nasi-goreng-telor.jpg"
-      },
-      "id": 1
-    }
-  ],
+  "carts": [],
   "orders": []
 }

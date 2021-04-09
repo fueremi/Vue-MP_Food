@@ -53,7 +53,7 @@
               ></b-form-textarea>
             </b-form-group>
 
-            <b-button type="submit" variant="success" @click="ordering" :disabled="!order.quantity || !order.notes"
+            <b-button type="submit" variant="success" @click.prevent="ordering" :disabled="!order.quantity || !order.notes"
               ><b-icon-cart></b-icon-cart> Order</b-button
             >
           </b-form>

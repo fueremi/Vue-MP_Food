@@ -129,7 +129,6 @@ export default {
   },
   methods: {
     deleteDataCart(data) {
-      console.log(data);
       this.$store.dispatch("carts/deleteDataCart", {
         cart_id: data.item.id,
         index: data.index,

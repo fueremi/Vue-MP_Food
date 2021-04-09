@@ -15,7 +15,7 @@
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
             <b-nav-item to="/cart">
-              Keranjang
+              Cart
               <b-icon-bag />
               <b-badge variant="success" class="ml-2">{{dataCartsLength}}
               </b-badge>
