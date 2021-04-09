@@ -95,7 +95,7 @@ export default {
   methods: {
     ordering() {
       this.order.product = this.dataFoodDetail;
-      this.$store.dispatch("postDataCarts", this.order);
+      this.$store.dispatch("carts/postDataCarts", this.order);
       this.$router.push("/cart");
       this.$root.$bvToast.toast(
         `${this.order.quantity} pcs ${this.order.product.nama} succesfully added to cart`,
@@ -109,12 +109,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
+    ...mapGetters("foods", {
       dataFoodDetail: "getDataFoods",
     }),
   },
   mounted() {
-    this.$store.dispatch("fetchDetailFood", {
+    this.$store.dispatch("foods/fetchDetailFood", {
       id_food: this.$route.params.id
     })
   },

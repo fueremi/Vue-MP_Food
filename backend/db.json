@@ -110,29 +110,16 @@
   "carts": [
     {
       "quantity": "1",
-      "notes": "Spicy",
+      "notes": "Spicy level: 3",
       "product": {
-        "id": 1,
-        "code": "K-01",
-        "nama": "Sate Ayam",
-        "harga": 16000,
+        "id": 2,
+        "code": "K-02",
+        "nama": "Nasi Goreng Telur",
+        "harga": 14000,
         "is_ready": true,
-        "gambar": "sate-ayam.jpg"
+        "gambar": "nasi-goreng-telor.jpg"
       },
       "id": 1
-    },
-    {
-      "quantity": "1",
-      "notes": "Add urat",
-      "product": {
-        "id": 6,
-        "code": "K-06",
-        "nama": "Bakso",
-        "harga": 10000,
-        "is_ready": true,
-        "gambar": "bakso.jpg"
-      },
-      "id": 2
     }
   ],
   "orders": []

@@ -44,12 +44,12 @@ export default {
     CardProduct,
   },
   computed: {
-    ...mapGetters({
+    ...mapGetters("bestSellers", {
       dataBestSellers: "getDataBestSellers",
     }),
   },
   created() {
-    this.$store.dispatch("fetchDataBestSellers");
+    this.$store.dispatch("bestSellers/fetchDataBestSellers");
   },
 };
 </script>

@@ -47,19 +47,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
+    ...mapGetters("foods", {
       dataFoods: "getDataFoods",
     }),
   },
   methods: {
     getSearchData(){
-      this.$store.dispatch("fetchSearchFoods", {
+      this.$store.dispatch("foods/fetchSearchFoods", {
         search: this.search
       })
     }
   },
   created() {
-    this.$store.dispatch("fetchDataFoods")
+    this.$store.dispatch('foods/fetchDataFoods')
   },
 };
 </script>

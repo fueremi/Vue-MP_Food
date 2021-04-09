@@ -17,7 +17,8 @@
             <b-nav-item to="/cart">
               Keranjang
               <b-icon-bag />
-              <b-badge variant="success" class="ml-2"> {{lengthOrder}} </b-badge>
+              <b-badge variant="success" class="ml-2">{{dataCartsLength}}
+              </b-badge>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
@@ -32,13 +33,13 @@ import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
   computed: {
-    ...mapGetters({
-      lengthOrder: "getDataCartsLength",
-    }),
+    ...mapGetters("carts", {
+      dataCartsLength: "getDataCartsLength",
+    })
   },
-  mounted(){
-    this.$store.dispatch('fetchDataCarts')
-  }
+  mounted() {
+    this.$store.dispatch("carts/fetchDataCarts");
+  },
 };
 </script>
 <style>

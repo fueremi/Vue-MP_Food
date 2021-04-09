@@ -54,7 +54,7 @@
               </template>
 
               <template #cell(delete)="data">
-                <b-button @click="deleteDataCart(data.item)" variant="transparent" class="text-danger"
+                <b-button @click="deleteDataCart(data)" variant="transparent" class="text-danger"
                   ><b-icon-trash></b-icon-trash
                 ></b-button>
               </template>
@@ -128,12 +128,14 @@ export default {
     };
   },
   methods: {
-    deleteDataCart(item) {
-      this.$store.dispatch("deleteDataCart", {
-        cart_id: item.id,
+    deleteDataCart(data) {
+      console.log(data);
+      this.$store.dispatch("carts/deleteDataCart", {
+        cart_id: data.item.id,
+        index: data.index,
       });
       this.$root.$bvToast.toast(
-        `${item.product.nama} succesfully deleted from cart!`,
+        `${data.item.product.nama} succesfully deleted from cart!`,
         {
           title: "MP Food Notification",
           toaster: "b-toaster-top-center",
@@ -144,12 +146,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
+    ...mapGetters("carts", {
       dataCarts: "getDataCarts",
     }),
   },
   mounted() {
-    this.$store.dispatch("fetchDataCarts");
+    this.$store.dispatch("carts/fetchDataCarts");
   },
 };
 </script>
